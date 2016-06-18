@@ -24,6 +24,30 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `presidents` /*!40100 DEFAULT CHARACTER
 USE `presidents`;
 
 --
+-- Table structure for table `college`
+--
+
+DROP TABLE IF EXISTS `college`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `college` (
+  `collegeID` int(11) NOT NULL AUTO_INCREMENT,
+  `collegeName` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`collegeID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `college`
+--
+
+LOCK TABLES `college` WRITE;
+/*!40000 ALTER TABLE `college` DISABLE KEYS */;
+INSERT INTO `college` VALUES (1,'Columbia College of Colum'),(2,'Yale University'),(4,'collegeName'),(5,'None');
+/*!40000 ALTER TABLE `college` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `president`
 --
 
@@ -34,11 +58,11 @@ CREATE TABLE `president` (
   `presidentID` int(11) NOT NULL AUTO_INCREMENT,
   `presidentName` varchar(25) DEFAULT NULL,
   `presidentDescription` varchar(255) DEFAULT NULL,
-  `whitehouseID` int(11) DEFAULT NULL,
+  `collegeID` int(11) DEFAULT NULL,
   PRIMARY KEY (`presidentID`),
-  KEY `whitehouseID` (`whitehouseID`),
-  CONSTRAINT `president_ibfk_1` FOREIGN KEY (`whitehouseID`) REFERENCES `whitehouse` (`whitehouseID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  KEY `collegeID` (`collegeID`),
+  CONSTRAINT `president_ibfk_1` FOREIGN KEY (`collegeID`) REFERENCES `college` (`collegeID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,32 +71,8 @@ CREATE TABLE `president` (
 
 LOCK TABLES `president` WRITE;
 /*!40000 ALTER TABLE `president` DISABLE KEYS */;
-INSERT INTO `president` VALUES (1,'',NULL,NULL),(2,'Home',NULL,NULL);
+INSERT INTO `president` VALUES (1,'presidentName','presidentDescription',NULL),(2,'Washington','OG',NULL);
 /*!40000 ALTER TABLE `president` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `whitehouse`
---
-
-DROP TABLE IF EXISTS `whitehouse`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `whitehouse` (
-  `whitehouseID` int(11) NOT NULL AUTO_INCREMENT,
-  `whitehouseName` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`whitehouseID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `whitehouse`
---
-
-LOCK TABLES `whitehouse` WRITE;
-/*!40000 ALTER TABLE `whitehouse` DISABLE KEYS */;
-INSERT INTO `whitehouse` VALUES (1,''),(2,'Home');
-/*!40000 ALTER TABLE `whitehouse` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -84,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-11 13:20:33
+-- Dump completed on 2016-06-18 18:38:10
